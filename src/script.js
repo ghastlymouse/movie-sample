@@ -46,8 +46,12 @@ function sch(movies) {
             return movies.title.toLowerCase().includes(searchVal.toLowerCase());
         });
         console.log("검색 결과 : ",schrslt);
-        section.innerHTML="";
-        schrslt.forEach((movie) => showMovies(movie));
+        if(schrslt.length > 0) {
+            section.innerHTML="";
+            schrslt.forEach((movie) => showMovies(movie));
+        } else {
+            alert('검색 결과가 존재하지 않습니다.');
+        }
     })
 }
 
