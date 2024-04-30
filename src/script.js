@@ -38,10 +38,10 @@ function showMovies(movies) {
 }
 
 // 검색 (최승현 튜터님 죄송해요. 두 번째 피드백은 어떻게 해야할지 잘 모르겠어요 )
-function searchMovieTitle(movies) {
+function searchMovieTitle(movies) { // 함수 이름 변경
     searchForm.addEventListener('submit', (e) => {
         e.preventDefault()
-        const cardSection = document.getElementById('cardSection');
+        const cardSection = document.getElementById('cardSection'); // ID로 가져오기
         const searchVal = document.getElementById('searchBar').value;
         console.log(searchVal, "을 검색"); 
         let searchResult = movies.filter((movies) => {
