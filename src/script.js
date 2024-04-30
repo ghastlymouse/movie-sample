@@ -23,13 +23,13 @@ async function getMovies() {
 // 가져온 데이터 카드로 보여주기 및 알림창
 function showMovies(movies) {
     const movieInfo = document.createElement('div');
-    //새로만든 div에 class, id추가하는법??
+    movieInfo.id = 'movieInfo'; // 생성한 요소에 ID 넣기
         movieInfo.innerHTML = `
-      <img src="https://image.tmdb.org/t/p/w500/${movies.poster_path}" alt="포스터" />
-      <h3>${movies.title}</h3>
-      <p">${movies.overview}</p>
-      <footer><p>평점 : ${movies.vote_average}점</p></footer>`;
-        document.querySelector("section").append(movieInfo);
+      <img id="poster" src="https://image.tmdb.org/t/p/w500/${movies.poster_path}" alt="포스터" />
+      <h3 id="movieTitle">${movies.title}</h3>
+      <p id="overview">${movies.overview}</p>
+      <footer  id="rating"><p>평점 : ${movies.vote_average}점</p></footer>`;
+        document.getElementById('cardSection').append(movieInfo);
         movieInfo.addEventListener('click', (e) => {
             alert(`영화 ID : ${movies.id}`);
             console.log('e.target : ', e.target);
@@ -44,7 +44,7 @@ function searchMovieTitle(movies) { // 함수 이름 변경
         const cardSection = document.getElementById('cardSection'); // ID로 가져오기
         const searchVal = document.getElementById('searchBar').value;
         console.log(searchVal, "을 검색"); 
-        let searchResult = movies.filter((movies) => {
+        let searchResult = movies.filter((movies) => { // 변수 이름 변경
             return movies.title.toLowerCase().includes(searchVal.toLowerCase());
         });
         console.log("검색 결과 : ",searchResult);
@@ -56,6 +56,9 @@ function searchMovieTitle(movies) { // 함수 이름 변경
         }
     })
 }
+
+// 페이지 로드시 검색창에 포커스
+document.getElementById('searchBar').focus();
 
 // 다 합쳐서 실행
 async function main() {
