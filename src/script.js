@@ -30,37 +30,38 @@ function showMovies(movies) {
       <p">${movies.overview}</p>
       <footer><p>평점 : ${movies.vote_average}점</p></footer>`;
         document.querySelector("section").append(movieInfo);
-        movieInfo.addEventListener('click', () => {
+        movieInfo.addEventListener('click', (e) => {
             alert(`영화 ID : ${movies.id}`);
+            console.log('e.target : ', e.target);
+            console.log('e.currentTarget : ', e.currentTarget);
         });
 }
 
-// 검색
-function sch(movies) {
+// 검색 (최승현 튜터님 죄송해요. 두 번째 피드백은 어떻게 해야할지 잘 모르겠어요 )
+function searchMovieTitle(movies) {
     searchForm.addEventListener('submit', (e) => {
         e.preventDefault()
-        const section = document.querySelector('section');
+        const cardSection = document.getElementById('cardSection');
         const searchVal = document.getElementById('searchBar').value;
         console.log(searchVal, "을 검색"); 
-        let schrslt = movies.filter((movies) => {
+        let searchResult = movies.filter((movies) => {
             return movies.title.toLowerCase().includes(searchVal.toLowerCase());
         });
-        console.log("검색 결과 : ",schrslt);
-        if(schrslt.length > 0) {
-            section.innerHTML="";
-            schrslt.forEach((movie) => showMovies(movie));
+        console.log("검색 결과 : ",searchResult);
+        if(searchResult.length > 0) {
+            cardSection.innerHTML="";
+            searchResult.forEach((movie) => showMovies(movie));
         } else {
             alert('검색 결과가 존재하지 않습니다.');
         }
     })
 }
 
-
 // 다 합쳐서 실행
 async function main() {
     const movies = await getMovies();
     movies.forEach((movie) => showMovies(movie));
-    sch(movies);
+    searchMovieTitle(movies);
     }
 
 
